@@ -1,12 +1,15 @@
 <template>
-  <div class="main">
+  <div>
     <p>Created by Masashi Kawakami</p>
+    <ContentTable/>
   </div>
 </template>
 
 <script>
-
+import ContentTable from '../components/ContentTable.vue';
 export default {
-  components: {}
+  components: {
+    ContentTable
+  }
 }
 </script>
