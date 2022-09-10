@@ -16,13 +16,35 @@
         <tr :key="`content_${index}`">
           <th scope="row">🗂</th>
           <td>
-            Mark
+            <router-link
+              :to="{
+                name: 'Details',
+                params: {
+                  content_id: content.id
+                }
+              }"
+            >
+              Mark
+            </router-link>
           </td>
-          <td>Otto</td>
+          <td>
+            {{ content.updated_at }}
+          </td>
           <!-- <td>@mdo</td> -->
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
+          <td>
+            {{ content.updated_by }}
+          </td>
+          <td>
+            <template v-if="content.content_type === 'folder'">
+              {{ content.content_size }} Files
+            </template>
+            <template v-else>
+              {{ content.content_size }} MB
+            </template>
+          </td>
+          <td>
+            {{ content.created_at }}
+          </td>
         </tr>
       </template>
     </tbody>
@@ -33,14 +55,35 @@ export default {
   data () {
     return {
       contents: [
-        {},
-        {},
-        {},
+        {
+          id: 1,
+          content_type: 'folder',
+          content_size: '10',
+          updated_at: '2022/10/15 10:25',
+          updated_by: 'Masashi Kawakami',
+          created_at: '2022/8/26 12:35'
+        },
+        {
+          id: 2,
+          content_type: 'file',
+          content_size: '10',
+          updated_at: '2022/10/15 10:25',
+          updated_by: 'Masashi Kawakami',
+          created_at: '2022/8/26 12:35'
+        },
+        {
+          id: 3,
+          content_type: 'folder',
+          content_size: '10',
+          updated_at: '2022/10/15 10:25',
+          updated_by: 'Masashi Kawakami',
+          created_at: '2022/8/26 12:35'
+        },
       ]
     };
   },
   created () {
-    this.getContents();
+    // this.getContents();
   },
   getContents () {
     axios.get('').then((response) => {
