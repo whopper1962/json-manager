@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-striped">
+  <table class="table table-striped table-style">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -16,16 +16,13 @@
         <tr :key="`content_${index}`">
           <th scope="row">🗂</th>
           <td>
-            <router-link
-              :to="{
-                name: 'Details',
-                params: {
-                  content_id: content.id
-                }
-              }"
+            <a
+              href="#"
+              class=""
+              @click="onClickContentName(content)"
             >
-              Mark
-            </router-link>
+              {{ content.content_name }}
+            </a>
           </td>
           <td>
             {{ content.updated_at }}
@@ -58,6 +55,7 @@ export default {
         {
           id: 1,
           content_type: 'folder',
+          content_name: 'hmbp-translation-files',
           content_size: '10',
           updated_at: '2022/10/15 10:25',
           updated_by: 'Masashi Kawakami',
@@ -66,6 +64,7 @@ export default {
         {
           id: 2,
           content_type: 'file',
+          content_name: 'en.json',
           content_size: '10',
           updated_at: '2022/10/15 10:25',
           updated_by: 'Masashi Kawakami',
@@ -74,6 +73,7 @@ export default {
         {
           id: 3,
           content_type: 'folder',
+          content_name: 'hmbp-batch-json',
           content_size: '10',
           updated_at: '2022/10/15 10:25',
           updated_by: 'Masashi Kawakami',
@@ -85,11 +85,27 @@ export default {
   created () {
     // this.getContents();
   },
-  getContents () {
-    axios.get('').then((response) => {
-      console.error(response)
-    }).catch((error) => {
-    });
+  methods: {
+    getContents () {
+      axios.get('').then((response) => {
+        console.error(response)
+      }).catch((error) => {
+      });
+    },
+    onClickContentName (content) {
+      if (content.content_type === 'file') {
+        this.$router.push({
+          name: 'Details',
+          params: {
+            content_id: content.id
+          }
+        })
+      } else {
+        this.getContents();
+      }
+    }
   }
 }
 </script>
+<style>
+</style>

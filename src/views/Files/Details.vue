@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>This is {{ contentId }}</h1>
-    <textarea></textarea>
   </div>
 </template>
 <script>
@@ -13,6 +12,7 @@ export default {
   },
   created () {
     this.contentId = this.$route.params['content_id'];
+    // this.getDetails();
   },
   methods: {
     getDetails () {
